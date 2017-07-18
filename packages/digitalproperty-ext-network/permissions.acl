@@ -1,0 +1,75 @@
+// =============================================================================
+// Access Control Rules for general system permissions
+
+// General rule to allow pariticipants to access the network
+// Read only access for the Network
+// Network admins would have UPDATE/DELETE here
+rule NetworkAccess {
+  description: "Description of the Basic ACL rule"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: READ
+  resource: "org.hyperledger.composer.system.Network"
+  action: ALLOW
+}
+
+// Gives all participants permission to access registries for READ
+rule RegistryAccess {
+  description: "Permit creating IDs and access to teh transaction registry"
+  participant: "net.biz.digitalproperty.core.Person"
+  operation: READ
+  resource: "org.hyperledger.composer.system.Registry"
+  action: ALLOW
+}
+
+// -----------------------------------------------------------------------------
+// IDAdmins needs to be able to create participants and identities
+// They need these permissions; with the conditions to only
+// permit IDAdmins from one organization to managed people in the same
+// organization
+
+rule IDAdmin_Create_BusinessAdmin {
+  description: "Permit Create of BusinessAdmin only when the IDAdmin is in the same organization"
+  participant(m): "net.biz.digitalproperty.core.IDAdmin"
+  operation: CREATE,READ
+  resource(v): "net.biz.digitalproperty.core.BusinessAdmin"
+  condition: (m.organization.orgId == v.organization.orgId )
+  action: ALLOW
+}
+
+rule IDAdmin_Create_OrgRep {
+  description: "Permit Create of BusinessAdmin only when the IDAdmin is in the same organization"
+  participant(m): "net.biz.digitalproperty.core.IDAdmin"
+  operation: CREATE,READ
+  resource(v): "net.biz.digitalproperty.core.OrganizationRepresentive"
+  condition: (m.organization.orgId == v.organization.orgId )
+  action: ALLOW
+}
+
+rule IDAdmin_Identity {
+  description: "Permit creating IDs and access to teh transaction registry"
+  participant: "net.biz.digitalproperty.core.IDAdmin"
+  operation: CREATE
+  resource: "org.hyperledger.composer.system.Identity"
+  action: ALLOW
+}
+
+rule IDAdmin_UssyeIdentity_Tx {
+  description: "Permit sending the tx"
+  participant: "net.biz.digitalproperty.core.IDAdmin"
+  operation: CREATE
+  resource: "org.hyperledger.composer.system.IssueIdentity"
+  action: ALLOW
+}
+
+// =============================================================================
+// Network specific access control rules
+//
+
+rule LR_BizAdmin_CreateAssets {
+  description: "Let Land regsitry business admins create assets"
+  participant(m): "net.biz.digitalproperty.core.BusinessAdmin"
+  operation: ALL
+  resource: "net.biz.digitalproperty.core.LandTitle"
+  condition: (m.organization.orgId == 'EnglandLandRegistry')
+  action: ALLOW
+}

@@ -1,0 +1,1 @@
+{   "$class" : "org.acme.biznet.core.Admin",  "email"  : "alice@example.com",  "firstname" :"alice",  "lastname"  :"andrews",  "jobtitle"  :"super-admin"}

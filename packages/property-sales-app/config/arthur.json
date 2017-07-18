@@ -1,0 +1,8 @@
+{
+  "composer-sample-app" : {
+     "participantId" : "arthur",
+     "participantPwd" :"lWlWwnDtyBVX",
+     "businessNetworkIdentifier" : "document-network",
+     "connectionProfile" : "hlfv1"
+  }
+}

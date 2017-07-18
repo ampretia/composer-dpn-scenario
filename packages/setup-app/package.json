@@ -1,0 +1,19 @@
+{
+  "name": "setup-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "addNewLandTitle.js",
+  "scripts": {
+      "landregistry:addTitles" : "node addNewLandTitle.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.0.1",
+    "cli-table": "^0.3.1",
+    "config": "^1.26.1",
+    "faker": "^4.1.0",
+    "prettyoutput": "^1.1.1"
+  }
+}

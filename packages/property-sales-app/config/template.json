@@ -1,0 +1,8 @@
+{
+  "composer-sample-app" : {
+     "participantId" : "{{ID}}",
+     "participantPwd" :"{{SECRET}}",
+     "businessNetworkIdentifier" : "document-network",
+     "connectionProfile" : "hlfv1"
+  }
+}

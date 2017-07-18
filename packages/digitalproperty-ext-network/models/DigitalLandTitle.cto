@@ -1,0 +1,104 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+namespace net.biz.digitalproperty.core
+
+/**
+ * Core land title asset
+ */
+asset LandTitle identified by titleId {
+  o String           titleId
+  --> Individual     owner
+  o String           information
+  o Boolean          forSale   optional
+  --> SalesAgreement currentSale optional
+}
+
+/** Based on the England and Wales property sale 'flow' */
+enum AgreementState {
+  o ON_MARKET
+  o OFFER_ACCEPTED
+  o CONTRACT_EXCHANGED
+  o COMPLETED
+}
+
+asset SalesAgreement identified by salesId {
+  o String          salesId
+  o AgreementState  state
+  --> Individual    buyer         optional
+  --> Individual    seller
+  --> LandTitle     title
+  --> Organization  sellingAgent  optional
+  --> Organization  legal         optional
+  
+}
+
+/** Registers a Property for Sale */
+transaction RegisterPropertyForSale {
+  --> Individual seller
+  --> LandTitle  title
+  --> Organization  sellingAgent  optional
+}
+
+enum OrgType {
+  o ESTATE_AGENT
+  o LAND_REGISTRY
+  o LEGAL
+  o DEVELOPER
+}
+
+asset Organization identified by orgId {
+  o String orgId
+  o String name
+  o OrgType type
+}
+
+/** Abstract persion type */
+abstract participant Person identified by email {
+  o String email
+  o String firstname
+  o String lastname
+}
+
+/** Business Person */
+participant OrganizationRepresentive extends Person {
+  o String jobtitle
+  --> Organization organization
+}
+
+
+participant Individual extends Person {
+  --> Individual[] related optional
+}
+
+
+/** Administration Participants */
+abstract participant Admin extends Person {
+  --> Organization organization
+}
+
+/** Identity only access */
+participant IDAdmin extends Admin{
+  
+}
+
+/** Update the network only access */
+participant NetworkAdmin extends Admin{
+
+}
+
+/** Permission to do things to the regstries and below but not update the BNA */
+participant BusinessAdmin extends Admin {
+
+}

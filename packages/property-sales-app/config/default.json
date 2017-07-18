@@ -1,0 +1,8 @@
+{
+  "composer-sample-app" : {
+     "participantId" : "maeid3",
+     "participantPwd" :"anJkgyROTxYo",
+     "businessNetworkIdentifier" : "sample-network",
+     "connectionProfile" : "hlfv1"
+  }
+}

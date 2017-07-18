@@ -1,0 +1,8 @@
+{
+  "composer-sample-app" : {
+     "participantId" : "bob@EnglandRegistry.com",
+     "participantPwd" :"qzXKFjufziTG",
+     "businessNetworkIdentifier" : "dpn-scenario",
+     "connectionProfile" : "hlfv1"
+  }
+}
