@@ -21,6 +21,31 @@ rule RegistryAccess {
   action: ALLOW
 }
 
+rule AdminNetworkAccess {
+  description: "Permit the network admin ability to update the network"
+  participant: "net.biz.digitalproperty.core.NetworkAdmin"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.Network"
+  action: ALLOW
+}
+
+rule SeeYourself_essential {
+  description: "Permit the ability to read your own identity"
+  participant: "net.biz.digitalproperty.core.Person"
+  operation: READ
+  resource: "org.hyperledger.composer.system.Identity"
+  action: ALLOW
+}
+
+rule SeeYourSelf_detail {
+  description: "See yourself"
+  participant(m): "net.biz.digitalproperty.core.Person"
+  operation: ALL
+  resource(v): "net.biz.digitalproperty.core.Person"
+  condition: (m.email == v.email)
+  action: ALLOW
+}
+
 // -----------------------------------------------------------------------------
 // IDAdmins needs to be able to create participants and identities
 // They need these permissions; with the conditions to only

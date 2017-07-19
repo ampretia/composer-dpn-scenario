@@ -21,6 +21,9 @@ ${DIR}/addIdentity.sh ian@quicksale.com net.biz.digitalproperty.core.IDAdmin#ian
 composer participant add -p hlfv1 -i admin -s adminpw -n dpn-scenario -d '{"$class" : "net.biz.digitalproperty.core.IDAdmin",  "email"  : "ian@SellCheap.com",  "firstname" :"ian",  "lastname"  :"andrews",  "jobtitle"  :"SellCheap id-admin","organization":"resource:net.biz.digitalproperty.core.Organization#SellCheap"}'
 ${DIR}/addIdentity.sh ian@SellCheap.com net.biz.digitalproperty.core.IDAdmin#ian@SellCheap.com admin
 
+composer participant add -p hlfv1 -i admin -s adminpw -n dpn-scenario -d '{"$class" : "net.biz.digitalproperty.core.NetworkAdmin",  "email"  : "nell@EnglandRegsitry.com",  "firstname" :"Nell",  "lastname"  :"Norris",  "jobtitle"  :"Network-admin","organization":"resource:net.biz.digitalproperty.core.Organization#EnglandRegistry"}'
+${DIR}/addIdentity.sh nell@EnglandRegsitry.com net.biz.digitalproperty.core.NetworkAdmin#nell@EnglandRegsitry.com admin
+
 #
 # Issue Identities for the indiviuals..
 composer participant add -p hlfv1 -i admin -s adminpw -n dpn-scenario -d '{"$class" : "net.biz.digitalproperty.core.Individual",  "email"  : "lisa@example.com",  "firstname" :"lisa",  "lastname"  :"lenon",  "jobtitle"  :"individual"}'
